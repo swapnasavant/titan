@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     main: [
       './src/main.js',
-      'webpack-dev-server/client?http://localhost:6000',
+      'webpack-dev-server/client?http://localhost:7000',
       'webpack/hot/only-dev-server'
     ]
   },
@@ -21,4 +21,8 @@ module.exports = {
     ]
   },
   plugins: [ignore],
+  devServer: {
+  host: '0.0.0.0',
+  port: '7000',
+},
 };
