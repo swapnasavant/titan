@@ -34,6 +34,7 @@ class Slider extends Component {
   constructor(props) {
     super();
     this._renderHandle = this._renderHandle.bind(this);
+    this._getMousePosition = this._getMousePosition.bind(this);
     min: 0;
     max: 100;
     step: 1;
@@ -369,7 +370,10 @@ class Slider extends Component {
 }
 
  _onMouseMove(e) {
-   var position = this._getMousePosition(e);
+   var position = [
+     e['page' + this._axisKey()],
+     e['page' + this._orthogonalAxisKey()]
+   ];
    this._move(position[0]);
 }
 
@@ -555,8 +559,8 @@ class Slider extends Component {
          key: 'handle' + i,
          className: className,
          style: style,
-         onMouseDown: this._createOnMouseDown(i),
-         onTouchStart: this._createOnTouchStart(i)
+         onMouseDown: this._createOnMouseDown.bind(this, i),
+         onTouchStart: this._createOnTouchStart.bind(this, i)
        },
        child
      )
@@ -661,8 +665,8 @@ class Slider extends Component {
        ref: 'slider',
        style: {position: 'relative'},
        className: props.className + (props.disabled ? ' disabled' : ''),
-       onMouseDown: this._onSliderMouseDown,
-       onClick: this._onSliderClick
+       onMouseDown: this._onSliderMouseDown.bind(this),
+       onClick: this._onSliderClick.bind(this)
      },
        bars,
        handles

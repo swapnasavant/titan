@@ -13,11 +13,17 @@ class App extends Component {
     return (
       <h1>
         {`${messageString} swapna!`}
-        <Demo
-          defaultValue={[0, 50, 100]}
-          orientation={'horizontal'}
-          withBars
-        />
+        <div id="horizontal-3">
+          <Demo
+            defaultValue={[0, 50, 100]}
+            orientation={'horizontal'}
+            handleClassName={'handle'}
+            handleActiveClassName={'active'}
+            barClassName={'bar'}
+            withBars
+          />
+        </div>
+
       </h1>
     );
   }

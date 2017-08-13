@@ -27,7 +27,16 @@ class Demo extends Component {
           pearling
           minDistance={10}
           value={this.state.value}
+          min={0}
+          max={100}
+          step={1}
+          withBars
           onChange={this.onChange.bind(this)}
+          defaultValue={[0, 50, 100]}
+          orientation={'horizontal'}
+          handleClassName={'handle'}
+          handleActiveClassName={'active'}
+          barClassName={'bar'}
         />
       </h1>
     );
