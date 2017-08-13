@@ -33,34 +33,15 @@ class Slider extends Component {
 
   constructor(props) {
     super();
-    this._renderHandle = this._renderHandle.bind(this);
-    this._getMousePosition = this._getMousePosition.bind(this);
-    min: 0;
-    max: 100;
-    step: 1;
-    minDistance: 0;
-    defaultValue: 0;
-    orientation: 'horizontal';
-    className: 'slider';
-    handleClassName: 'handle';
-    handleActiveClassName: 'active';
-    barClassName: 'bar';
-    withBars: false;
-    pearling: false;
-    disabled: false;
-    snapDragDisabled: false;
-    invert: false;
-    var value = this._or(this.ensureArray(props.value), this.ensureArray(props.defaultValue), props);
-
-    // reused throughout the component to store results of iterations over `value`
+    this.renderHandle = this.renderHandle.bind(this);
+    this.getMousePosition = this.getMousePosition.bind(this);
+    const value = this.or(this.ensureArray(props.value), this.ensureArray(props.defaultValue), props);
     this.tempArray = value.slice();
-
-    // array for storing resize timeouts ids
     this.pendingResizeTimeouts = [];
 
-    var zIndices = [];
+    const zIndices = [];
     for (var i = 0; i < value.length; i++) {
-      value[i] = this._trimAlignValue(value[i], props);
+      value[i] = this.trimAlignValue(value[i], props);
       zIndices.push(i);
     }
 
@@ -74,50 +55,33 @@ class Slider extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    var value = this._or(this.ensureArray(newProps.value), this.state.value);
+    const value = this.or(this.ensureArray(newProps.value), this.state.value);
 
     // ensure the array keeps the same size as `value`
     this.tempArray = value.slice();
 
     for (var i = 0; i < value.length; i++) {
-      this.state.value[i] = this._trimAlignValue(value[i], newProps);
+      this.state.value[i] = this.trimAlignValue(value[i], newProps);
     }
-    if (this.state.value.length > value.length)
+    if (this.state.value.length > value.length) {
       this.state.value.length = value.length;
+    }
 
     // If an upperBound has not yet been determined (due to the component being hidden
     // during the mount event, or during the last resize), then calculate it now
     if (this.state.upperBound === 0) {
-      this._handleResize();
-    }
-  }
-
-  _or(value, defaultValue, props) {
-    var props = this.props ? this.props : (props);
-    var count = 0; //React.Children.count(props.children || 0);
-    switch (count) {
-      case 0:
-        return value.length > 0 ? value : defaultValue;
-      case value.length:
-        return value;
-      case defaultValue.length:
-        return defaultValue;
-      default:
-        if (value.length !== count || defaultValue.length !== count) {
-          console.warn(this.constructor.displayName + ": Number of values does not match number of children.");
-        }
-        return this.linspace(props.min, props.max, count);
+      this.handleResize();
     }
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this._handleResize);
-    this._handleResize();
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
   }
 
   componentWillUnmount() {
-    this._clearPendingResizeTimeouts();
-    window.removeEventListener('resize', this._handleResize);
+    this.clearPendingResizeTimeouts();
+    window.removeEventListener('resize', this.handleResize);
   }
 
   getValue() {
@@ -154,7 +118,7 @@ class Slider extends Component {
     return x != null && x.length === 1 ? x[0] : x;
   }
 
-  _handleResize() {
+  handleResize() {
     // setTimeout of 0 gives element enough time to have assumed its new size if it is being resized
     var resizeTimeout = window.setTimeout(function() {
       // drop this timeout from pendingResizeTimeouts to reduce memory usage
@@ -164,10 +128,10 @@ class Slider extends Component {
       var handle = this.refs.handle0;
       var rect = slider.getBoundingClientRect();
 
-      var size = this._sizeKey();
+      var size = this.sizeKey();
 
-      var sliderMax = rect[this._posMaxKey()];
-      var sliderMin = rect[this._posMinKey()];
+      var sliderMax = rect[this.posMaxKey()];
+      var sliderMin = rect[this.posMinKey()];
 
       this.setState({
         upperBound: slider[size] - handle[size],
@@ -181,7 +145,7 @@ class Slider extends Component {
   }
 
   // clear all pending timeouts to avoid error messages after unmounting
-  _clearPendingResizeTimeouts() {
+  clearPendingResizeTimeouts() {
     do {
       var nextTimeout = this.pendingResizeTimeouts.shift();
 
@@ -190,7 +154,7 @@ class Slider extends Component {
   }
 
   // calculates the offset of a handle in pixels based on its value.
-  _calcOffset(value) {
+  calcOffset(value) {
     var range = this.props.max - this.props.min;
     if (range === 0) {
       return 0;
@@ -199,33 +163,33 @@ class Slider extends Component {
     return ratio * this.state.upperBound;
   }
 
-  // calculates the value corresponding to a given pixel offset, i.e. the inverse of `_calcOffset`.
-  _calcValue(offset) {
+  // calculates the value corresponding to a given pixel offset, i.e. the inverse of `calcOffset`.
+  calcValue(offset) {
     var ratio = offset / this.state.upperBound;
     return ratio * (this.props.max - this.props.min) + this.props.min;
   }
 
-  _buildHandleStyle(offset, i) {
+  buildHandleStyle(offset, i) {
     var style = {
       position: 'absolute',
-      willChange: this.state.index >= 0 ? this._posMinKey() : '',
+      willChange: this.state.index >= 0 ? this.posMinKey() : '',
       zIndex: this.state.zIndices.indexOf(i) + 1
     };
-    style[this._posMinKey()] = offset + 'px';
+    style[this.posMinKey()] = offset + 'px';
     return style;
   }
 
-  _buildBarStyle(min, max) {
+  buildBarStyle(min, max) {
     var obj = {
       position: 'absolute',
-      willChange: this.state.index >= 0 ? this._posMinKey() + ',' + this._posMaxKey() : ''
+      willChange: this.state.index >= 0 ? this.posMinKey() + ',' + this.posMaxKey() : ''
     };
-    obj[this._posMinKey()] = min;
-    obj[this._posMaxKey()] = max;
+    obj[this.posMinKey()] = min;
+    obj[this.posMaxKey()] = max;
     return obj;
   }
 
-  _getClosestIndex(pixelOffset) {
+  getClosestIndex(pixelOffset) {
     var minDist = Number.MAX_VALUE;
     var closestIndex = -1;
 
@@ -233,7 +197,7 @@ class Slider extends Component {
     var l = value.length;
 
     for (var i = 0; i < l; i++) {
-      var offset = this._calcOffset(value[i]);
+      var offset = this.calcOffset(value[i]);
       var dist = Math.abs(pixelOffset - offset);
       if (dist < minDist) {
         minDist = dist;
@@ -244,7 +208,7 @@ class Slider extends Component {
     return closestIndex;
   }
 
-  _calcOffsetFromPosition(position) {
+  calcOffsetFromPosition(position) {
     var pixelOffset = position - this.state.sliderStart;
     if (this.props.invert) pixelOffset = this.state.sliderLength - pixelOffset;
     pixelOffset -= (this.state.handleSize / 2);
@@ -252,10 +216,10 @@ class Slider extends Component {
   }
 
   // Snaps the nearest handle to the value corresponding to `position` and calls `callback` with that handle's index.
-  _forceValueFromPosition(position, callback) {
-    var pixelOffset = this._calcOffsetFromPosition(position);
-    var closestIndex = this._getClosestIndex(pixelOffset);
-    var nextValue = this._trimAlignValue(this._calcValue(pixelOffset));
+  forceValueFromPosition(position, callback) {
+    var pixelOffset = this.calcOffsetFromPosition(position);
+    var closestIndex = this.getClosestIndex(pixelOffset);
+    var nextValue = this.trimAlignValue(this.calcValue(pixelOffset));
 
     var value = this.state.value.slice(); // Clone this.state.value since we'll modify it temporarily
     value[closestIndex] = nextValue;
@@ -268,72 +232,90 @@ class Slider extends Component {
     this.setState({value: value}, callback.bind(this, closestIndex));
   }
 
-  _getMousePosition(e) {
+  getMousePosition(e) {
     return [
-      e['page' + this._axisKey()],
-      e['page' + this._orthogonalAxisKey()]
+      e['page' + this.axisKey()],
+      e['page' + this.orthogonalAxisKey()]
     ];
   }
 
-  _getTouchPosition(e) {
-    var touch = e.touches[0];
-    return [
-      touch['page' + this._axisKey()],
-      touch['page' + this._orthogonalAxisKey()]
-    ];
-  }
-
-  _getMouseEventMap() {
-    return {
-      'mousemove': this._onMouseMove,
-      'mouseup': this._onMouseUp
+  or(value, defaultValue, props) {
+    var props = this.props ? this.props : (props);
+    var count = 0; //React.Children.count(props.children || 0);
+    switch (count) {
+      case 0:
+        return value.length > 0 ? value : defaultValue;
+      case value.length:
+        return value;
+      case defaultValue.length:
+        return defaultValue;
+      default:
+        if (value.length !== count || defaultValue.length !== count) {
+          console.warn(this.constructor.displayName + ": Number of values does not match number of children.");
+        }
+        return this.linspace(props.min, props.max, count);
     }
   }
 
-  _getTouchEventMap() {
+  getTouchPosition(e) {
+    var touch = e.touches[0];
+    return [
+      touch['page' + this.axisKey()],
+      touch['page' + this.orthogonalAxisKey()]
+    ];
+  }
+
+  getMouseEventMap() {
     return {
-      'touchmove': this._onTouchMove,
-      'touchend': this._onTouchEnd
+      'mousemove': this.onMouseMove,
+      'mouseup': this.onMouseUp
+    }
+  }
+
+  getTouchEventMap() {
+    return {
+      'touchmove': this.onTouchMove,
+      'touchend': this.onTouchEnd
     }
   }
 
   // create the `mousedown` handler for the i-th handle
-  _createOnMouseDown(i) {
+  createOnMouseDown(i) {
     return function (e) {
       if (this.props.disabled) return;
-      var position = this._getMousePosition(e);
-      this._start(i, position[0]);
-      this._addHandlers(this._getMouseEventMap());
+      var position = this.getMousePosition(e);
+      this.start(i, position[0]);
+      this.addHandlers(this.getMouseEventMap());
       this.pauseEvent(e);
     }.bind(this);
   }
 
   // create the `touchstart` handler for the i-th handle
-  _createOnTouchStart(i) {
+  createOnTouchStart(i) {
     return function (e) {
       if (this.props.disabled || e.touches.length > 1) return;
-      var position = this._getTouchPosition(e);
+      var position = this.getTouchPosition(e);
       this.startPosition = position;
       this.isScrolling = undefined; // don't know yet if the user is trying to scroll
-      this._start(i, position[0]);
-      this._addHandlers(this._getTouchEventMap());
+      this.start(i, position[0]);
+      this.addHandlers(this.getTouchEventMap());
       this.stopPropagation(e);
     }.bind(this);
   }
 
-  _addHandlers(eventMap) {
+  addHandlers(eventMap) {
     for (var key in eventMap) {
       document.addEventListener(key, eventMap[key], false);
     }
   }
 
-  _removeHandlers(eventMap) {
+  removeHandlers(eventMap) {
     for (var key in eventMap) {
       document.removeEventListener(key, eventMap[key], false);
     }
   }
 
-  _start(i, position) {
+  start(i, position) {
     // if activeElement is body window will lost focus in IE9
     // if activeElement is body window will lost focus in IE9
     if (document.activeElement && document.activeElement != document.body) {
@@ -342,7 +324,7 @@ class Slider extends Component {
 
     this.hasMoved = false;
 
-    this._fireChangeEvent('onBeforeChange');
+    this.fireChangeEvent('onBeforeChange');
 
     var zIndices = this.state.zIndices;
     zIndices.splice(zIndices.indexOf(i), 1); // remove wherever the element is
@@ -356,31 +338,31 @@ class Slider extends Component {
     });
  }
 
- _onMouseUp() {
-   this._onEnd(this._getMouseEventMap());
+ onMouseUp() {
+   this.onEnd(this.getMouseEventMap());
 }
 
- _onTouchEnd() {
-   this._onEnd(this._getTouchEventMap());
+ onTouchEnd() {
+   this.onEnd(this.getTouchEventMap());
 }
 
- _onEnd(eventMap) {
-   this._removeHandlers(eventMap);
-   this.setState({index: -1}, this._fireChangeEvent.bind(this, 'onAfterChange'));
+ onEnd(eventMap) {
+   this.removeHandlers(eventMap);
+   this.setState({index: -1}, this.fireChangeEvent.bind(this, 'onAfterChange'));
 }
 
- _onMouseMove(e) {
+ onMouseMove(e) {
    var position = [
-     e['page' + this._axisKey()],
-     e['page' + this._orthogonalAxisKey()]
+     e['page' + this.axisKey()],
+     e['page' + this.orthogonalAxisKey()]
    ];
-   this._move(position[0]);
+   this.move(position[0]);
 }
 
- _onTouchMove(e) {
+ onTouchMove(e) {
    if (e.touches.length > 1) return;
 
-   var position = this._getTouchPosition(e);
+   var position = this.getTouchPosition(e);
 
    if (typeof this.isScrolling === 'undefined') {
      var diffMainDir = position[0] - this.startPosition[0];
@@ -395,10 +377,10 @@ class Slider extends Component {
 
    this.pauseEvent(e);
 
-   this._move(position[0]);
+   this.move(position[0]);
 }
 
- _move(position) {
+ move(position) {
    this.hasMoved = true;
 
    var props = this.props;
@@ -413,7 +395,7 @@ class Slider extends Component {
    if (props.invert) diffPosition *= -1;
 
    var diffValue = diffPosition / (state.sliderLength - state.handleSize) * (props.max - props.min);
-   var newValue = this._trimAlignValue(state.startValue + diffValue);
+   var newValue = this.trimAlignValue(state.startValue + diffValue);
 
    var minDistance = props.minDistance;
 
@@ -440,32 +422,32 @@ class Slider extends Component {
    // if "pearling" is enabled, let the current handle push the pre- and succeeding handles.
    if (props.pearling && length > 1) {
      if (newValue > oldValue) {
-       this._pushSucceeding(value, minDistance, index);
-       this._trimSucceeding(length, value, minDistance, props.max);
+       this.pushSucceeding(value, minDistance, index);
+       this.trimSucceeding(length, value, minDistance, props.max);
      }
      else if (newValue < oldValue) {
-       this._pushPreceding(value, minDistance, index);
-       this._trimPreceding(length, value, minDistance, props.min);
+       this.pushPreceding(value, minDistance, index);
+       this.trimPreceding(length, value, minDistance, props.min);
      }
    }
 
    // Normally you would use `shouldComponentUpdate`, but since the slider is a low-level component,
    // the extra complexity might be worth the extra performance.
    if (newValue !== oldValue) {
-     this.setState({value: value}, this._fireChangeEvent.bind(this, 'onChange'));
+     this.setState({value: value}, this.fireChangeEvent.bind(this, 'onChange'));
    }
 }
 
- _pushSucceeding(value, minDistance, index) {
+ pushSucceeding(value, minDistance, index) {
    var i, padding;
    for (i = index, padding = value[i] + minDistance;
         value[i + 1] != null && padding > value[i + 1];
         i++, padding = value[i] + minDistance) {
-     value[i + 1] = this._alignValue(padding);
+     value[i + 1] = this.alignValue(padding);
    }
 }
 
- _trimSucceeding(length, nextValue, minDistance, max) {
+ trimSucceeding(length, nextValue, minDistance, max) {
    for (var i = 0; i < length; i++) {
      var padding = max - i * minDistance;
      if (nextValue[length - 1 - i] > padding) {
@@ -474,16 +456,16 @@ class Slider extends Component {
    }
 }
 
- _pushPreceding(value, minDistance, index) {
+ pushPreceding(value, minDistance, index) {
    var i, padding;
    for (i = index, padding = value[i] - minDistance;
         value[i - 1] != null && padding < value[i - 1];
         i--, padding = value[i] - minDistance) {
-     value[i - 1] = this._alignValue(padding);
+     value[i - 1] = this.alignValue(padding);
    }
 }
 
- _trimPreceding(length, nextValue, minDistance, min) {
+ trimPreceding(length, nextValue, minDistance, min) {
    for (var i = 0; i < length; i++) {
      var padding = min + i * minDistance;
      if (nextValue[i] < padding) {
@@ -492,41 +474,41 @@ class Slider extends Component {
    }
 }
 
- _axisKey() {
+ axisKey() {
    var orientation = this.props.orientation;
    if (orientation === 'horizontal') return 'X';
    if (orientation === 'vertical') return 'Y';
 }
 
- _orthogonalAxisKey() {
+ orthogonalAxisKey() {
    var orientation = this.props.orientation;
    if (orientation === 'horizontal') return 'Y';
    if (orientation === 'vertical') return 'X';
 }
 
- _posMinKey() {
+ posMinKey() {
    var orientation = this.props.orientation;
    if (orientation === 'horizontal') return this.props.invert ? 'right' : 'left';
    if (orientation === 'vertical') return this.props.invert ? 'bottom' : 'top';
 }
 
- _posMaxKey() {
+ posMaxKey() {
    var orientation = this.props.orientation;
    if (orientation === 'horizontal') return this.props.invert ? 'left' : 'right';
    if (orientation === 'vertical') return this.props.invert ? 'top' : 'bottom';
 }
 
- _sizeKey() {
+ sizeKey() {
    var orientation = this.props.orientation;
    if (orientation === 'horizontal') return 'clientWidth';
    if (orientation === 'vertical') return 'clientHeight';
 }
 
- _trimAlignValue(val, props) {
-   return this._alignValue(this._trimValue(val, props), props);
+ trimAlignValue(val, props) {
+   return this.alignValue(this.trimValue(val, props), props);
 }
 
- _trimValue(val, props) {
+ trimValue(val, props) {
    props = props || this.props;
 
    if (val <= props.min) val = props.min;
@@ -535,7 +517,7 @@ class Slider extends Component {
    return val;
 }
 
- _alignValue(val, props) {
+ alignValue(val, props) {
    props = props || this.props;
 
    var valModStep = (val - props.min) % props.step;
@@ -548,7 +530,7 @@ class Slider extends Component {
    return parseFloat(alignValue.toFixed(5));
 }
 
- _renderHandle(style, child, i) {
+ renderHandle(style, child, i) {
    var className = this.props.handleClassName + ' ' +
      (this.props.handleClassName + '-' + i) + ' ' +
      (this.state.index === i ? this.props.handleActiveClassName : '');
@@ -559,24 +541,24 @@ class Slider extends Component {
          key: 'handle' + i,
          className: className,
          style: style,
-         onMouseDown: this._createOnMouseDown.bind(this, i),
-         onTouchStart: this._createOnTouchStart.bind(this, i)
+         onMouseDown: this.createOnMouseDown.bind(this, i),
+         onTouchStart: this.createOnTouchStart.bind(this, i)
        },
        child
      )
    );
 }
 
- _renderHandles(offset) {
+ renderHandles(offset) {
    var length = offset.length;
 
    var styles = this.tempArray;
    for (var i = 0; i < length; i++) {
-     styles[i] = this._buildHandleStyle(offset[i], i);
+     styles[i] = this.buildHandleStyle(offset[i], i);
    }
 
    var res = this.tempArray;
-   var renderHandle = this._renderHandle;
+   var renderHandle = this.renderHandle;
    if (React.Children.count(this.props.children) > 0) {
      React.Children.forEach(this.props.children, function (child, i) {
        res[i] = renderHandle(styles[i], child, i);
@@ -589,58 +571,58 @@ class Slider extends Component {
    return res;
 }
 
- _renderBar(i, offsetFrom, offsetTo) {
+ renderBar(i, offsetFrom, offsetTo) {
    return (
      React.createElement('div', {
        key: 'bar' + i,
        ref: 'bar' + i,
        className: this.props.barClassName + ' ' + this.props.barClassName + '-' + i,
-       style: this._buildBarStyle(offsetFrom, this.state.upperBound - offsetTo)
+       style: this.buildBarStyle(offsetFrom, this.state.upperBound - offsetTo)
      })
    );
 }
 
- _renderBars(offset) {
+ renderBars(offset) {
    var bars = [];
    var lastIndex = offset.length - 1;
 
-   bars.push(this._renderBar(0, 0, offset[0]));
+   bars.push(this.renderBar(0, 0, offset[0]));
 
    for (var i = 0; i < lastIndex; i++) {
-     bars.push(this._renderBar(i + 1, offset[i], offset[i + 1]));
+     bars.push(this.renderBar(i + 1, offset[i], offset[i + 1]));
    }
 
-   bars.push(this._renderBar(lastIndex + 1, offset[lastIndex], this.state.upperBound));
+   bars.push(this.renderBar(lastIndex + 1, offset[lastIndex], this.state.upperBound));
 
    return bars;
 }
 
- _onSliderMouseDown(e) {
+ onSliderMouseDown(e) {
    if (this.props.disabled) return;
    this.hasMoved = false;
    if (!this.props.snapDragDisabled) {
-     var position = this._getMousePosition(e);
-     this._forceValueFromPosition(position[0], function (i) {
-       this._fireChangeEvent('onChange');
-       this._start(i, position[0]);
-       this._addHandlers(this._getMouseEventMap());
+     var position = this.getMousePosition(e);
+     this.forceValueFromPosition(position[0], function (i) {
+       this.fireChangeEvent('onChange');
+       this.start(i, position[0]);
+       this.addHandlers(this.getMouseEventMap());
      }.bind(this));
    }
 
    this.pauseEvent(e);
 }
 
- _onSliderClick(e) {
+ onSliderClick(e) {
    if (this.props.disabled) return;
 
    if (this.props.onSliderClick && !this.hasMoved) {
-     var position = this._getMousePosition(e);
-     var valueAtPos = this._trimAlignValue(this._calcValue(this._calcOffsetFromPosition(position[0])));
+     var position = this.getMousePosition(e);
+     var valueAtPos = this.trimAlignValue(this.calcValue(this.calcOffsetFromPosition(position[0])));
      this.props.onSliderClick(valueAtPos);
    }
 }
 
- _fireChangeEvent(event) {
+ fireChangeEvent(event) {
    if (this.props[event]) {
      this.props[event](this.undoEnsureArray(this.state.value));
    }
@@ -654,19 +636,19 @@ class Slider extends Component {
    var value = state.value;
    var l = value.length;
    for (var i = 0; i < l; i++) {
-     offset[i] = this._calcOffset(value[i], i);
+     offset[i] = this.calcOffset(value[i], i);
    }
 
-   var bars = props.withBars ? this._renderBars(offset) : null;
-   var handles = this._renderHandles(offset);
+   var bars = props.withBars ? this.renderBars(offset) : null;
+   var handles = this.renderHandles(offset);
 
    return (
      React.createElement('div', {
        ref: 'slider',
        style: {position: 'relative'},
        className: props.className + (props.disabled ? ' disabled' : ''),
-       onMouseDown: this._onSliderMouseDown.bind(this),
-       onClick: this._onSliderClick.bind(this)
+       onMouseDown: this.onSliderMouseDown.bind(this),
+       onClick: this.onSliderClick.bind(this)
      },
        bars,
        handles
