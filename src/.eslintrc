@@ -1,0 +1,15 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "arrow-body-style": ["error", "as-needed"],
+    "jsx-a11y/href-no-hash": 0,
+    "import/prefer-default-export": 0,
+    "max-len": 0,
+    "no-console": ["error", { allow: ["warn", "error"] }],
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-no-bind": 0,
+    "react/prefer-stateless-function": 0,
+  }
+}
