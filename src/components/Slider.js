@@ -551,24 +551,34 @@ class Slider extends Component {
    var styles = this.tempArray;
    for (var i = 0; i < length; i++) {
      styles[i] = this.buildHandleStyle(offset[i], i);
-     if(i === 1) {
        console.log(styles[i].left);
-       if(parseInt(styles[i].left, 10) > 600) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/4.jpg')";
-       } else if(parseInt(styles[i].left, 10) > 500) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/3.jpg')";
-       } else if(parseInt(styles[i].left, 10) > 460) {
+       if(parseInt(styles[i].left, 10) > (window.innerWidth - window.innerWidth/8)) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/1.jpg')";
+       } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 2 * (window.innerWidth/8))) {
          document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/2.jpg')";
+       } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 3 * (window.innerWidth/8))) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/3.jpg')";
+       } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 4 * (window.innerWidth/8))) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/4.jpg')";
+       } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 5 * (window.innerWidth/8))) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/5.jpg')";
+       } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 6 * (window.innerWidth/8))) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/6.jpg')";
+       } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 7 * (window.innerWidth/8))) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/7.jpg')";
+       } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 8 * (window.innerWidth/8))) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/8.jpg')";
        }
-     }
    }
 
    var res = this.tempArray;
+   console.log(React.Children);
    var renderHandle = this.renderHandle;
    if (React.Children.count(this.props.children) > 0) {
-     React.Children.forEach(this.props.children, function (child, i) {
-       res[i] = renderHandle(styles[i], child, i);
-     });
+     res[1] = renderHandle(styles[1], child, i);
+    //  React.Children.forEach(this.props.children, function (child, i) {
+    //    res[i] = renderHandle(styles[i], child, i);
+    //  });
    } else {
      for (i = 0; i < length; i++) {
        res[i] = renderHandle(styles[i], null, i);
@@ -591,14 +601,14 @@ class Slider extends Component {
  renderBars(offset) {
    var bars = [];
    var lastIndex = offset.length - 1;
-
+   console.log(lastIndex);
    bars.push(this.renderBar(0, 0, offset[0]));
 
-   for (var i = 0; i < lastIndex; i++) {
-     bars.push(this.renderBar(i + 1, offset[i], offset[i + 1]));
-   }
-
-   bars.push(this.renderBar(lastIndex + 1, offset[lastIndex], this.state.upperBound));
+  //  for (var i = 0; i < lastIndex; i++) {
+  //    bars.push(this.renderBar(i + 1, offset[i], offset[i + 1]));
+  //  }
+   //
+  //  bars.push(this.renderBar(lastIndex + 1, offset[lastIndex], this.state.upperBound));
 
    return bars;
 }

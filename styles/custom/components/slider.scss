@@ -28,27 +28,28 @@ body {
    background-image: url('/assets/1.jpg');
    background-size: cover;
  }
- // .bar.bar-2 {
- //   background: #0f0;
- //   background-image: url('/assets/2.jpg');
- //   background-size: cover;
- // }
  .horizontal-slider .bar {
      height: 100vh;
  }
  .images-1 {
    background-image: url('/assets/002-summer-3.png');
-   height: 356px;
-   width: 512px;
-   margin-left: 190px;
-   position: absolute;
    top: 0;
+   height: 356px;
+  width: 512px;
+  margin-left: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  left: 0;
+  vertical-align: middle;
+  margin-right: auto;
  }
  .horizontal-slider .handle {
      top: 1px;
      width: 1px;
      height: 100vh;
-     curor: crosshair;
+     cursor: col-resize;
      line-height: 48px;
  }
  .vertical-slider .handle {

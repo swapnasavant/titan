@@ -14,7 +14,7 @@ class App extends Component {
       <h1>
         <div id="horizontal-3">
           <Demo
-            defaultValue={[0, 50, 100]}
+            defaultValue={[50]}
             orientation={'horizontal'}
             handleClassName={'handle'}
             handleActiveClassName={'active'}
