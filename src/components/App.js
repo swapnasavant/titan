@@ -12,7 +12,6 @@ class App extends Component {
 
     return (
       <h1>
-        {`${messageString} swapna!`}
         <div id="horizontal-3">
           <Demo
             defaultValue={[0, 50, 100]}

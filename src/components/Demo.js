@@ -38,6 +38,7 @@ class Demo extends Component {
           handleActiveClassName={'active'}
           barClassName={'bar'}
         />
+        <div className="images-1" />
       </h1>
     );
   }

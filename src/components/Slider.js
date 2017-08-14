@@ -181,7 +181,6 @@ class Slider extends Component {
 
   buildBarStyle(min, max) {
     var obj = {
-      position: 'absolute',
       willChange: this.state.index >= 0 ? this.posMinKey() + ',' + this.posMaxKey() : ''
     };
     obj[this.posMinKey()] = min;
@@ -267,9 +266,9 @@ class Slider extends Component {
 
   getMouseEventMap() {
     return {
-      'mousemove': this.onMouseMove,
-      'mouseup': this.onMouseUp
-    }
+      'mousemove': this.onMouseMove.bind(this),
+      'mouseup': this.onMouseUp.bind(this),
+    };
   }
 
   getTouchEventMap() {
@@ -352,10 +351,7 @@ class Slider extends Component {
 }
 
  onMouseMove(e) {
-   var position = [
-     e['page' + this.axisKey()],
-     e['page' + this.orthogonalAxisKey()]
-   ];
+   var position = this.getMousePosition(e);
    this.move(position[0]);
 }
 
@@ -555,6 +551,16 @@ class Slider extends Component {
    var styles = this.tempArray;
    for (var i = 0; i < length; i++) {
      styles[i] = this.buildHandleStyle(offset[i], i);
+     if(i === 1) {
+       console.log(styles[i].left);
+       if(parseInt(styles[i].left, 10) > 600) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/4.jpg')";
+       } else if(parseInt(styles[i].left, 10) > 500) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/3.jpg')";
+       } else if(parseInt(styles[i].left, 10) > 460) {
+         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/2.jpg')";
+       }
+     }
    }
 
    var res = this.tempArray;

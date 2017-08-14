@@ -17,7 +17,8 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel?' + JSON.stringify({presets: ['react', 'es2015', 'stage-0']})], exclude: /node_modules/ },
-      { test: /\.scss$/, loaders: ['style', 'css', 'postcss', 'sass'] }
+      { test: /\.scss$/, loaders: ['style', 'css', 'postcss', 'sass'] },
+      { test: /\.(png|jpg|gif)$/, loader: 'file-loader?name=./images/[name].[ext]' }
     ]
   },
   plugins: [ignore],
