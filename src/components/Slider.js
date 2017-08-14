@@ -420,8 +420,7 @@ class Slider extends Component {
      if (newValue > oldValue) {
        this.pushSucceeding(value, minDistance, index);
        this.trimSucceeding(length, value, minDistance, props.max);
-     }
-     else if (newValue < oldValue) {
+     } else if (newValue < oldValue) {
        this.pushPreceding(value, minDistance, index);
        this.trimPreceding(length, value, minDistance, props.min);
      }
@@ -430,18 +429,18 @@ class Slider extends Component {
    // Normally you would use `shouldComponentUpdate`, but since the slider is a low-level component,
    // the extra complexity might be worth the extra performance.
    if (newValue !== oldValue) {
-     this.setState({value: value}, this.fireChangeEvent.bind(this, 'onChange'));
+     this.setState({ value }, this.fireChangeEvent.bind(this, 'onChange'));
    }
-}
+ }
 
- pushSucceeding(value, minDistance, index) {
-   var i, padding;
-   for (i = index, padding = value[i] + minDistance;
-        value[i + 1] != null && padding > value[i + 1];
-        i++, padding = value[i] + minDistance) {
-     value[i + 1] = this.alignValue(padding);
-   }
-}
+  pushSucceeding(value, minDistance, index) {
+    var i, padding;
+    for (i = index, padding = value[i] + minDistance;
+      value[i + 1] != null && padding > value[i + 1];
+      i++, padding = value[i] + minDistance) {
+      value[i + 1] = this.alignValue(padding);
+    }
+  }
 
  trimSucceeding(length, nextValue, minDistance, max) {
    for (var i = 0; i < length; i++) {
