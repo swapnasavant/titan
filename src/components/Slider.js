@@ -552,21 +552,21 @@ class Slider extends Component {
      styles[i] = this.buildHandleStyle(offset[i], i);
        console.log(styles[i].left);
        if(parseInt(styles[i].left, 10) > (window.innerWidth - window.innerWidth/8)) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/1.jpg')";
+         document.getElementsByClassName('bar')[0].className = 'bar bar-0 bar_img_1';
        } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 2 * (window.innerWidth/8))) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/2.jpg')";
+         document.getElementsByClassName('bar')[0].className = 'bar bar-0 bar_img_2';
        } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 3 * (window.innerWidth/8))) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/3.jpg')";
+         document.getElementsByClassName('bar')[0].className = 'bar bar-0 bar_img_3';
        } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 4 * (window.innerWidth/8))) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/4.jpg')";
+         document.getElementsByClassName('bar')[0].className = 'bar bar-0 bar_img_4';
        } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 5 * (window.innerWidth/8))) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/5.jpg')";
+         document.getElementsByClassName('bar')[0].className = 'bar bar-0 bar_img_5';
        } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 6 * (window.innerWidth/8))) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/6.jpg')";
+         document.getElementsByClassName('bar')[0].className = 'bar bar-0 bar_img_6';
        } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 7 * (window.innerWidth/8))) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/7.jpg')";
+         document.getElementsByClassName('bar')[0].className = 'bar bar-0 bar_img_7';
        } else if(parseInt(styles[i].left, 10) > (window.innerWidth - 8 * (window.innerWidth/8))) {
-         document.getElementsByClassName('bar')[0].style.backgroundImage = "url('/assets/8.jpg')";
+         document.getElementsByClassName('bar')[0].className = 'bar bar-0 bar_img_8';
        }
    }
 
