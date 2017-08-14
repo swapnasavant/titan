@@ -3,10 +3,11 @@ import React, { Component, PropTypes } from 'react';
 import Slider from './Slider';
 
 const propTypes = {
-  message: PropTypes.object.isRequired,
+  orientation: PropTypes.string,
+  defaultValue: PropTypes.array,
 };
 
-class Demo extends Component {
+class Content extends Component {
 
   constructor(props) {
     super();
@@ -16,7 +17,7 @@ class Demo extends Component {
   }
 
   onChange(value) {
-  this.setState({ value: value });
+    this.setState({ value });
   }
 
   render() {
@@ -44,6 +45,6 @@ class Demo extends Component {
   }
 }
 
-Demo.propTypes = propTypes;
+Content.propTypes = propTypes;
 
-export default Demo;
+export default Content;

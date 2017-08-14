@@ -1,19 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
-import Demo from './Demo';
+import Content from './Content';
 
-const propTypes = {
-  message: PropTypes.object.isRequired,
-};
 
 class App extends Component {
   render() {
-    const { messageString } = this.props.message;
-
     return (
       <h1>
         <div id="horizontal-3">
-          <Demo
+          <Content
             defaultValue={[50]}
             orientation={'horizontal'}
             handleClassName={'handle'}
@@ -27,7 +22,5 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = propTypes;
 
 export default App;
