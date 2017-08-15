@@ -10,17 +10,7 @@ class App extends Component {
     const arr = [`${time/24 *100}`];
     return (
       <h1>
-        <div id="horizontal-3">
-          <Content
-            defaultValue={arr}
-            orientation={'horizontal'}
-            handleClassName={'handle'}
-            handleActiveClassName={'active'}
-            barClassName={'bar'}
-            withBars
-          />
-        </div>
-
+          <Content />
       </h1>
     );
   }

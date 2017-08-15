@@ -49,6 +49,9 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.1.2",
+    "react-track": "^0.3.4",
+    "react-imation": "^0.5.3",
+    "functional-easing": "^1.0.8",
     "redux": "^3.1.4",
     "redux-thunk": "^2.0.1"
   }

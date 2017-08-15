@@ -12,24 +12,28 @@ body {
  .handle {
      font-size: 0.9em;
      text-align: center;
-     background-color: black;
+     background-color: white;
      color: white;
      cursor: pointer;
+     z-index: 100;
  }
  .handle.active {
      background-color: grey;
  }
  .bar {
-     position: relative;
-     background: #ddd;
+   text-decoration:none;
+   position: absolute;
+   z-index: 10;
+   right: -25px;
+   background: #ddd;
  }
  .bar {
    background: #EC6367;
    background-size: cover;
-   opacity: 0.5;
+
  }
- .bar_img_1 {
-   background-image: url('/assets/1.jpg');
+ .bar_img_1,.horizontal-slider {
+   background-image: url('/assets/8.jpg');
  }
  .bar_img_2 {
    background-image: url('/assets/2.jpg');
@@ -49,8 +53,8 @@ body {
  .bar_img_7 {
    background-image: url('/assets/7.jpg');
  }
- .bar_img_8 {
-   background-image: url('/assets/8.jpg');
+ .bar_img_8,.horizontal-slider {
+   background-image: url('/assets/1.jpg');
  }
  .horizontal-slider .bar {
      height: 100vh;
@@ -67,6 +71,7 @@ body {
   text-align: center;
   left: 0;
   vertical-align: middle;
+  z-index: 100;
   margin-right: auto;
  }
  .horizontal-slider .handle {
@@ -88,3 +93,53 @@ body {
  #horizontal-2 .bar.bar-2 {
      background: #ddd;
  }
+
+ .comparison {
+  width: 100%;
+  height: 100%;
+}
+.comparison figure {
+  margin: 0 !important;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.comparison figure > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(100% + 1px);
+  height: 100%;
+}
+.comparison figure > div > div {
+  position: absolute;
+  top: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: white;
+}
+.comparison figure img {
+  display: block;
+  position: relative;
+  object-fit: fill;
+  height: 100%;
+}
+.comparison input {
+  margin-top: 1em;
+}
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 175px;
+    padding: 0 5px;
+}
