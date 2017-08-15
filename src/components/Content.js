@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import Slider from './Slider';
+import ImageCompare from './ImageCompare';
 
 const propTypes = {
   orientation: PropTypes.string,
@@ -21,23 +21,18 @@ class Content extends Component {
   }
 
   render() {
+    const img1 = '/assets/8.jpg'
+    const img2 = '/assets/6.jpg'
+    const compareStylesScroll = { borderRight: `3px dotted yellow` };
+    const compareStylesManual = { borderBottom: `3px dotted yellow` };
     return (
       <h1>
-        <Slider
-          className={`${this.props.orientation}-slider`}
-          pearling
-          minDistance={10}
-          value={this.state.value}
-          min={0}
-          max={100}
-          step={1}
-          withBars
-          onChange={this.onChange.bind(this)}
-          defaultValue={[0, 50, 100]}
-          orientation={'horizontal'}
-          handleClassName={'handle'}
-          handleActiveClassName={'active'}
-          barClassName={'bar'}
+        <ImageCompare
+          srcOver={img1}
+          srcUnder={img2}
+          vertical={false}
+          controls={true}
+          styles={compareStylesManual}
         />
         <div className="images-1" />
       </h1>
