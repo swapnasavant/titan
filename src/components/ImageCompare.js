@@ -11,14 +11,14 @@ export default class ImageCompare extends Component {
   }
 
   render() {
-
+    const { percentage } = this.state;
     const { vertical, srcOver, srcUnder, controls, styles } = this.props
 
     return (
 
        <div className='comparison'>
          <figure>
-           <img src={ srcOver } alt="" />
+           <img src={ srcOver } alt="" width="100%"/>
            {/* The default is to render horizontally */}
            { !vertical &&
              <div style={{
@@ -26,7 +26,7 @@ export default class ImageCompare extends Component {
                  backgroundImage: `url(${srcUnder})`,
                  ...styles
                }}
-               className="compare-controls"
+               className="compare-controls abcd-cover"
                >
                { controls &&
                    <input
