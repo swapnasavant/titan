@@ -124,7 +124,6 @@ body {
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: white;
 }
 .comparison figure img {
   display: block;
@@ -137,6 +136,7 @@ body {
   width: 100%;
   position: fixed;
   margin-left: -1em;
+  z-index: 110;
 }
 
 .abcd {
@@ -151,13 +151,11 @@ body {
   background-size: cover;
 }
 
-body {
-    padding: 30px;
-}
 input[type=range] {
     /*removes default webkit styles*/
     -webkit-appearance: none;
-
+    /* Height of the input slider*/
+    height: 50px;
     /*fix for FF unable to apply focus style bug */
     background-color: transparent;
 
@@ -175,15 +173,15 @@ input[type=range]::-webkit-slider-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: black;
+    background: gold;
     margin-top: -4px;
 }
-input[type=range]:focus {
-    outline: none;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-    background: transparent;
-}
+// input[type=range]:focus {
+//     outline: none;
+// }
+// input[type=range]:focus::-webkit-slider-runnable-track {
+//     background: transparent;
+// }
 
 input[type=range]::-moz-range-track {
     width: 300px;
@@ -197,7 +195,7 @@ input[type=range]::-moz-range-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: black;
+    background: gold;
 }
 
 /*hide the outline behind the border*/
@@ -233,11 +231,157 @@ input[type=range]::-ms-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: black;
+    background: gold;
 }
 input[type=range]:focus::-ms-fill-lower {
     background: #888;
 }
 input[type=range]:focus::-ms-fill-upper {
     background: #ccc;
+}
+
+.tooltip-item {
+    width: 20px;
+    height: 20px;
+    margin: -15px 0 0 -15px;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid;
+    -webkit-animation: pulse-item 0.6s infinite alternate;
+    animation: pulse-item 0.6s infinite alternate;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.tooltip-item {
+    border-color: #fff;
+}
+
+.tooltip-item.tooltip-item-1 {
+  left: 424px;
+  top: 296px;
+  z-index: 110;
+  height: 20px;
+  width: 20px;
+}
+
+svg {
+	position: absolute;
+	-webkit-transform: translate(102%, 350%);
+	transform: translate(102%, 350%);
+}
+.group {
+    -webkit-transform: translate(42.5px,42.5px);
+    -moz-transform: translate(42.5px,42.5px);
+    transform: translate(42.5px, 42.5px);
+}
+path {
+    -webkit-transform: translate(-42.50px,-42.50px);
+    -moz-transform: translate(-42.50px,-42.50px);
+    transform: translate(-42.50px,-42.50px);
+}
+.large {
+	-webkit-animation: large 2.5s infinite;
+	-moz-animation: large 2.5s infinite;
+}
+.large-2 {
+	-webkit-animation: large-2 2.5s infinite;
+	-moz-animation: large-2 2.5s infinite;
+}
+.small {
+	-webkit-animation: small 2.5s infinite;
+	-moz-animation: small 2.5s infinite;
+}
+@-webkit-keyframes large {
+	0% {
+		opacity: 0;
+		-webkit-transform: rotate(0deg) scale(0);
+		transform: rotate(0deg) scale(0);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: rotate(360deg) scale(1.5);
+		transform: rotate(360deg) scale(1.5);
+	}
+}
+@-moz-keyframes large {
+	0% {
+		opacity: 0;
+		transform: rotate(0deg) scale(0);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: rotate(360deg) scale(1.5);
+	}
+}
+@-webkit-keyframes large-2 {
+	0% {
+		opacity: 0;
+		-webkit-transform: rotate(45deg) scale(0);
+		transform: rotate(45deg) scale(0);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: rotate(405deg) scale(1.1);
+		transform: rotate(405deg) scale(1.1);
+	}
+}
+@-moz-keyframes large-2 {
+	0% {
+		opacity: 0;
+		transform: rotate(45deg) scale(0);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: rotate(405deg) scale(1.1);
+	}
+}
+@-webkit-keyframes small {
+	0% {
+		opacity: 0;
+		-webkit-transform: rotate(0deg) scale(0);
+		transform: rotate(0deg) scale(0);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: rotate(-360deg) scale(1);
+		transform: rotate(-360deg) scale(1.5);
+	}
+}
+@-moz-keyframes small {
+	0% {
+		opacity: 0;
+		transform: rotate(0deg) scale(0);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: rotate(-360deg) scale(1.5);
+	}
+}
+
+.fff {
+  top: -100px !important;
+  left: 270px !important;
+  z-index: 110;
 }

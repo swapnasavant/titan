@@ -21,8 +21,8 @@ class Content extends Component {
   }
 
   render() {
-    const img1 = '/assets/8.jpg'
-    const img2 = '/assets/6.jpg'
+    const img1 = '/assets/2.jpg'
+    const img2 = '/assets/3.jpg'
     const compareStylesScroll = { borderRight: `3px dotted yellow` };
     const compareStylesManual = { borderBottom: `3px dotted yellow` };
     return (
@@ -34,7 +34,7 @@ class Content extends Component {
           controls={true}
           styles={compareStylesManual}
         />
-        <div className="images-1" />
+      <div className="images-1" />
       </h1>
     );
   }
