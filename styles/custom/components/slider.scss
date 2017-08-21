@@ -136,7 +136,7 @@ body {
   width: 100%;
   position: fixed;
   margin-left: -1em;
-  z-index: 110;
+  z-index: 200;
 }
 
 .abcd {
@@ -155,7 +155,8 @@ input[type=range] {
     /*removes default webkit styles*/
     -webkit-appearance: none;
     /* Height of the input slider*/
-    height: 50px;
+    height: 100%;
+    top: -300px;
     /*fix for FF unable to apply focus style bug */
     background-color: transparent;
 
@@ -176,12 +177,12 @@ input[type=range]::-webkit-slider-thumb {
     background: gold;
     margin-top: -4px;
 }
-// input[type=range]:focus {
-//     outline: none;
-// }
-// input[type=range]:focus::-webkit-slider-runnable-track {
-//     background: transparent;
-// }
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: transparent;
+}
 
 input[type=range]::-moz-range-track {
     width: 300px;
@@ -268,11 +269,18 @@ input[type=range]:focus::-ms-fill-upper {
   width: 20px;
 }
 
-svg {
+.sg1 {
 	position: absolute;
-	-webkit-transform: translate(102%, 350%);
-	transform: translate(102%, 350%);
+	-webkit-transform: translate(-280%, 195%);
+  transform: translate(-280%, 195%);
 }
+
+.sg2 {
+  position: absolute;
+  -webkit-transform: translate(200%, 140%);
+  transform: translate(200%, 140%);
+}
+
 .group {
     -webkit-transform: translate(42.5px,42.5px);
     -moz-transform: translate(42.5px,42.5px);
