@@ -59,21 +59,22 @@ body {
  .horizontal-slider .bar {
      height: 100vh;
  }
+
  .images-1 {
-   background-image: url('/assets/002-summer-3.png');
-   top: 0;
-   height: 356px;
-  width: 512px;
-  margin-left: auto;
+  background-image: url('/assets/reading-glasses.png');
+  background-repeat: no-repeat;
+  top: 150px;
+  height: 256px;
+  width: 256px;
+  margin: 0 auto;
   position: absolute;
-  top: 0;
   right: 0;
   text-align: center;
   left: 0;
   vertical-align: middle;
   z-index: 100;
-  margin-right: auto;
  }
+
  .horizontal-slider .handle {
      top: 1px;
      width: 1px;
@@ -159,7 +160,6 @@ input[type=range] {
     top: -300px;
     /*fix for FF unable to apply focus style bug */
     background-color: transparent;
-
 }
 input[type=range]::-webkit-slider-runnable-track {
     width: 300px;
@@ -171,10 +171,9 @@ input[type=range]::-webkit-slider-runnable-track {
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: gold;
+    height: 128px;
+    width: 128px;
+    background: url('/assets/tab.png') no-repeat center center;
     margin-top: -4px;
 }
 input[type=range]:focus {
@@ -196,6 +195,7 @@ input[type=range]::-moz-range-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
+    background: url(https://static.enginethemes.com/main/img/drag-icon.png) no-repeat center center;
     background: gold;
 }
 
@@ -232,6 +232,7 @@ input[type=range]::-ms-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
+    background: url(https://static.enginethemes.com/main/img/drag-icon.png) no-repeat center center;
     background: gold;
 }
 input[type=range]:focus::-ms-fill-lower {
@@ -271,14 +272,14 @@ input[type=range]:focus::-ms-fill-upper {
 
 .sg1 {
 	position: absolute;
-	-webkit-transform: translate(-280%, 195%);
-  transform: translate(-280%, 195%);
+	-webkit-transform: translate(-150%, 114%);
+  transform: translate(-150%, 114%);
 }
 
 .sg2 {
   position: absolute;
-  -webkit-transform: translate(200%, 140%);
-  transform: translate(200%, 140%);
+  -webkit-transform: translate(75%, 55%);
+  transform: translate(75%, 55%);
 }
 
 .group {
