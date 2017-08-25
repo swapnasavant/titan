@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
-import ImageCompare from './ImageCompare';
+import ImageOverlap from './ImageOverlap';
 
 const propTypes = {
-  orientation: PropTypes.string,
   defaultValue: PropTypes.array,
 };
 
@@ -21,26 +20,24 @@ class Content extends Component {
   }
 
   render() {
-    const img1 = '/assets/city.jpg'
-    const img2 = '/assets/city1.jpg'
-    const compareStylesScroll = { borderRight: `3px dotted yellow` };
-    const compareStylesManual = { borderBottom: `3px dotted yellow` };
-    const img3 = '/assets/reading-glasses.png'
-    const img4 = '/assets/reading-glasses-white.png'
+    const img1 = '/assets/city.jpg';
+    const img2 = '/assets/city1.jpg';
+    const img3 = '/assets/reading-glasses.png';
+    const img4 = '/assets/reading-glasses-white.png';
     return (
       <h1>
-        <ImageCompare
+        <ImageOverlap
           srcOver={img1}
           srcUnder={img2}
           vertical={false}
           controls={true}
           percentage={50}
-          styles={compareStylesManual}
         />
-      <div className="images-1">
-          <ImageCompare
+        <div className="images-1">
+          <ImageOverlap
             srcOver={img4}
             srcUnder={img3}
+            id="specs"
             vertical={true}
             trace={true}
             percentage={this.state.value}
@@ -74,7 +71,7 @@ class Content extends Component {
               </g>
             </g>
           </svg>
-      </div>
+        </div>
       </h1>
     );
   }

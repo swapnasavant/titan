@@ -1,15 +1,18 @@
+/* global document */
 import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
+  id: PropTypes.string,
   percentage: PropTypes.string,
   vertical: PropTypes.bool,
   srcOver: PropTypes.string,
   srcUnder: PropTypes.string,
   controls: PropTypes.bool,
   styles: PropTypes.object,
+  trace: PropTypes.bool,
 };
 
-class ImageCompare extends Component {
+class ImageOverlap extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +26,7 @@ class ImageCompare extends Component {
     const { percentage } = this.state;
     let ahead = percentage >= 50 ? parseInt(percentage, 10) + 20 : parseInt(percentage, 10) - 20;
     ahead = ahead >= 100 ? 100 : ahead;
-    document.getElementById('obj').style.width = `${ahead}%`;
+    document.getElementById('specs').style.width = `${ahead}%`;
   }
 
   dragger() {
@@ -34,29 +37,27 @@ class ImageCompare extends Component {
 
   render() {
     const { percentage } = this.state;
-    const { vertical, srcOver, srcUnder, controls, styles, trace } = this.props;
+    const { id, vertical, srcOver, srcUnder, controls, trace } = this.props;
 
     return (
       <div className="comparison">
         <figure>
-          <img src={srcOver} alt="" width="100%" />
-            { trace &&
-              <div
-                id="obj"
-                style={{
-                  width: `${percentage}%`,
-                  backgroundImage: `url(${srcUnder})`,
-                  ...styles,
-                }}
-                className="compare-controls abcd-cover"
-              />
-           }
+          <img src={srcOver} className={`${trace ? 'perspective' : ''}`} alt="" width="100%" />
+          { trace &&
+            <div
+              id={id}
+              style={{
+                width: `${percentage}%`,
+                backgroundImage: `url(${srcUnder})`,
+              }}
+              className="compare-controls abcd-cover perspective"
+            />
+         }
           { !vertical &&
             <div
               style={{
                 width: `${percentage}%`,
                 backgroundImage: `url(${srcUnder})`,
-                ...styles,
               }}
               className="compare-controls abcd-cover"
             >
@@ -79,6 +80,6 @@ class ImageCompare extends Component {
 
 }
 
-ImageCompare.propTypes = propTypes;
+ImageOverlap.propTypes = propTypes;
 
-export default ImageCompare;
+export default ImageOverlap;

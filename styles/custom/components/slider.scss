@@ -268,16 +268,20 @@ input[type=range]:focus::-ms-fill-upper {
   width: 20px;
 }
 
+.perspective {
+  transform: rotateX(45deg);
+}
+
 .sg1 {
 	position: absolute;
-	-webkit-transform: translate(-150%, 114%);
-  transform: translate(-150%, 114%);
+	-webkit-transform: translate(-150%, -145%);
+  transform: translate(-150%, -150%);
 }
 
 .sg2 {
   position: absolute;
-  -webkit-transform: translate(75%, 55%);
-  transform: translate(75%, 55%);
+  -webkit-transform: translate(75%, -200%);
+  transform: translate(75%, -182%);
 }
 
 .group {
