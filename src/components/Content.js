@@ -12,7 +12,7 @@ class Content extends Component {
   constructor(props) {
     super();
     this.state = {
-      value: props.defaultValue,
+      value: props.defaultValue || 50,
     };
   }
 
@@ -25,8 +25,8 @@ class Content extends Component {
     const img2 = '/assets/city1.jpg'
     const compareStylesScroll = { borderRight: `3px dotted yellow` };
     const compareStylesManual = { borderBottom: `3px dotted yellow` };
-    const img3 = '/assets/002-summer-3.png'
-    const img4 = '/assets/002-summer-3.png'
+    const img3 = '/assets/reading-glasses.png'
+    const img4 = '/assets/reading-glasses-white.png'
     return (
       <h1>
         <ImageCompare
@@ -34,9 +34,18 @@ class Content extends Component {
           srcUnder={img2}
           vertical={false}
           controls={true}
+          percentage={50}
           styles={compareStylesManual}
         />
       <div className="images-1">
+          <ImageCompare
+            srcOver={img4}
+            srcUnder={img3}
+            vertical={true}
+            trace={true}
+            percentage={this.state.value}
+            controls={false}
+          />
           <svg className="sg1" width="100" height="100" viewBox="0 0 100 100">
             <g className="group" opacity="0.8">
               <g className="large">
