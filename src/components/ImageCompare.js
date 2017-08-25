@@ -13,7 +13,7 @@ class ImageCompare extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      percentage: props.percentage || 1,
+      percentage: props.percentage || 50,
     };
 
     this.dragger = this.dragger.bind(this);
@@ -32,7 +32,7 @@ class ImageCompare extends Component {
     return (
       <div className="comparison">
         <figure>
-          <img src={srcOver} alt="" width="100%"/>
+          <img src={srcOver} alt="" width="100%" />
           { !vertical &&
             <div
               style={{

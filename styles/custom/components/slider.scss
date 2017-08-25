@@ -67,7 +67,7 @@ body {
   height: 256px;
   width: 256px;
   margin: 0 auto;
-  position: absolute;
+  position: fixed;
   right: 0;
   text-align: center;
   left: 0;
@@ -136,7 +136,6 @@ body {
   margin-top: 23em;
   width: 100%;
   position: fixed;
-  margin-left: -1em;
   z-index: 200;
 }
 
@@ -157,7 +156,7 @@ input[type=range] {
     -webkit-appearance: none;
     /* Height of the input slider*/
     height: 100%;
-    top: -300px;
+    margin-top: 0px;
     /*fix for FF unable to apply focus style bug */
     background-color: transparent;
 }
@@ -171,8 +170,8 @@ input[type=range]::-webkit-slider-runnable-track {
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
-    height: 128px;
-    width: 128px;
+    height: 32px;
+    width: 32px;
     background: url('/assets/tab.png') no-repeat center center;
     margin-top: -4px;
 }
