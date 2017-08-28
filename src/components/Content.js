@@ -25,7 +25,7 @@ class Content extends Component {
     const img3 = '/assets/reading-glasses.png';
     const img4 = '/assets/reading-glasses-white.png';
     return (
-      <h1>
+      <div>
         <ImageOverlap
           srcOver={img1}
           srcUnder={img2}
@@ -72,7 +72,15 @@ class Content extends Component {
             </g>
           </svg>
         </div>
-      </h1>
+        <div className="menu">
+           <ul>
+             <li className="li"> Home </li>
+             <li> Work </li>
+             <li> Interests </li>
+             <li> Contact </li>
+           </ul>
+        </div>
+      </div>
     );
   }
 }

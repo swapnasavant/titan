@@ -8,7 +8,6 @@ const propTypes = {
   srcOver: PropTypes.string,
   srcUnder: PropTypes.string,
   controls: PropTypes.bool,
-  styles: PropTypes.object,
   trace: PropTypes.bool,
 };
 

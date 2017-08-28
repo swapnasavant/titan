@@ -1,0 +1,17 @@
+.menu {
+  font-weight: normal;
+  position: fixed;
+  top: 0;
+  color: darkgoldenrod;
+  right: 0;
+
+  ul {
+    list-style: none;
+    display: flex;
+    font-size: 20px;
+
+    li {
+       margin: 10px;
+     }
+  }
+}
