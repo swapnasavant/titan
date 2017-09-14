@@ -22,7 +22,7 @@ class Content extends Component {
   render() {
     const img1 = '/assets/city.jpg';
     const img2 = '/assets/city1.jpg';
-    const img3 = '/assets/reading-glasses.png';
+    const img3 = '/assets/reading-glasses.svg';
     const img4 = '/assets/reading-glasses-white.png';
     return (
       <div>
@@ -73,12 +73,10 @@ class Content extends Component {
           </svg>
         </div>
         <div className="menu">
-           <ul>
-             <li className="li"> Home </li>
-             <li> Work </li>
-             <li> Interests </li>
-             <li> Contact </li>
-           </ul>
+          <div className="menu__wrapper">
+            <div className="menu__left"> Interests </div>
+            <div className="menu__right" />
+          </div>
         </div>
       </div>
     );

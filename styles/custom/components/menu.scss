@@ -1,9 +1,15 @@
 .menu {
   font-weight: normal;
-  position: fixed;
+  position: absolute;
   top: 0;
-  color: darkgoldenrod;
+  height: 300px;
+  margin: 0px 30px;
+  width: 300px;
+  background-color: #933EC5;
+  color: #933EC5;
+  border-radius: 0px 0px 45px 45px;
   right: 0;
+  -webkit-animation: expand 5s;
 
   ul {
     list-style: none;
@@ -14,4 +20,69 @@
        margin: 10px;
      }
   }
+}
+
+@-webkit-keyframes expand{
+  0%{height:0px}
+  100%{height:300px}
+}
+
+.menu__wrapper {
+  display: flex;
+  margin: 60px 0px 0px -10px;
+  position: absolute;
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  background-color: #BFC353;
+  opacity: 0.8;
+  -moz-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Firefox */
+  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Safari and Chrome */
+  -o-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Opera */
+  animation: cssAnimation 0s ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.menu__left,
+.menu__right {
+  flex: 1;
+}
+
+.menu__left {
+  background-color: #FFFFFF;
+  margin-bottom: 15px;
+  margin-left: -15px;
+  margin-top: -10px;
+}
+
+.menu__right {
+  margin: -22px 16px 7px 0px;
+  background-color: pink;
+  background-image: url('/assets/interests.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width:50px;
+  height: 155px;
+  line-height:100px;
+}
+
+@keyframes cssAnimation {
+    to {
+      height: 140px;
+      width: 325px;
+      visibility: visible;
+    }
+}
+
+@-webkit-keyframes cssAnimation {
+    to {
+      height: 140px;
+      width: 325px;
+      visibility: visible;
+    }
 }

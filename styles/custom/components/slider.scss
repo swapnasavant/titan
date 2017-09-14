@@ -204,7 +204,7 @@ input[type=range]::-moz-range-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: url(https://static.enginethemes.com/main/img/drag-icon.png) no-repeat center center;
+    background: url('/assets/tab.png') no-repeat center center;
     background: gold;
 }
 
@@ -241,7 +241,7 @@ input[type=range]::-ms-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: url(https://static.enginethemes.com/main/img/drag-icon.png) no-repeat center center;
+    background: url('/assets/tab.png') no-repeat center center;
     background: gold;
 }
 input[type=range]:focus::-ms-fill-lower {
