@@ -72,12 +72,6 @@ class Content extends Component {
             </g>
           </svg>
         </div>
-        <div className="menu">
-          <div className="menu__wrapper">
-            <div className="menu__left"> Interests </div>
-            <div className="menu__right" />
-          </div>
-        </div>
       </div>
     );
   }
